@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" manifest="app.manifest">
+<head>
+<title>WW Calc</title>
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, minimal-ui" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link rel="apple-touch-icon" href="./icon.png">
+<link rel="apple-touch-startup-image" href="/Loading.png">
+<style>
+body {
+    font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+    margin: 0px !important;
+    padding: 0 px;
+    min-width: 320px;
+    background-color: #1abc9c;
+     
+}
+div * {
+    vertical-align:middle;
+}
+input {
+    display: block;
+    font-size: 16px;
+    border: 1px solid #1abc9c;
+}
+
+content {
+    margin: 0px auto;
+   
+}
+
+#header {
+	margin-top: -11px;
+	padding: 0px;
+    min-width: 320px;
+    background-color: #1abc9c;
+    color: white;
+}
+
+#headerText {
+    font-weight: 200;
+    font-size: 32px;
+}
+
+#points {
+    font-weight: 200;
+    font-size: 22px;
+}
+
+.mButton {
+    color: white;
+    background-color: #e74c3c;
+    width: 194px;
+    height: 37px;
+    color: white;
+    font-size: 18px;
+    line-height: 36px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    -khtml-border-radius: 5px;
+    display: inline-block;
+}
+
+.mButton:active {
+    background-color: #c0392b;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+#calc{
+	margin-top: -20px;
+	width:100%
+	background-color:#1abc9c;
+}
+@media all and (min-width:768px) {
+#headerText{ font-size:35px;margin-top:0px;}
+.mButton{
+	width:180px;
+	}
+}
+</style>
+<script>
+document.ontouchmove = function(e){ 
+	e.preventDefault(); 
+}
+window.onload = function() {
+  var input = document.getElementById("fat").focus();
+
+}
+input.onfocus = function () {
+       window.scrollTo(0, 0);
+       document.body.scrollTop = 0;
+    }
+function findPoints(){
+	var fat = document.getElementById("fat").value;
+	var carbs = document.getElementById("carbs").value;
+	var fiber = document.getElementById("fiber").value;
+	var protein = document.getElementById("protein").value;
+	points = Math.round((protein/10.9375) + (carbs/9.2105) + (fat/3.8889) + (fiber/35));
+	document.getElementById("points").innerHTML = points + " pts.";
+}
+function reset(){
+	document.getElementById("fat").value = ""
+	document.getElementById("carbs").value = ""
+	document.getElementById("fiber").value = ""
+	document.getElementById("protein").value = ""
+	document.getElementById("points").innerHTML = "0 pts.";
+	document.getElementById("fat").focus();
+}
+</script>
+</head>
+<body>
+<center>
+<div id="content">
+		<div id="header">
+			<h2 id="headerText"><br/>WW Points Calculator<h2>
+			<h3 id="points">0 pts.<h3>
+		</div>
+		<div id="calc">
+		<input type="number" min="0" id="fat" placeholder="Fat" onKeyPress="findPoints()" onKeyUp="findPoints()"></input>
+		<input type="number" min="0" id="carbs" placeholder="Carbs" onKeyPress="findPoints()" onKeyUp="findPoints()"></input>
+		<input type="number" min="0" id="fiber" placeholder="Fiber" onKeyPress="findPoints()" onKeyUp="findPoints()"></input>
+		<input type="number" min="0" id="protein" placeholder="Protein" onKeyPress="findPoints()" onKeyUp="findPoints()" ></input>
+		<div class="mButton" onClick="reset()">
+			Reset
+		</div>
+		</div>
+</div>
+</center>
+</body>
+</html>
